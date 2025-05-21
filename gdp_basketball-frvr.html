@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball-frvr  - Nestico | Your Cozy Game Corner</title>
+    <meta name="description" content="Shoot, score, and soar to new heights in the ultimate basketball experience that keeps you coming back for more!. Enjoy this relaxing game at Nestico.fun!">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --mint-green: #A4D4AE;
+            --warm-yellow: #FDE68A;
+            --soft-brown: #A58B6F;
+            --pale-green: #F0F9F4;
+            --dark-brown-gray: #3B3A30;
+        }
+        
+        body {
+            background-color: var(--pale-green);
+            color: var(--dark-brown-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8BC9A7;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9D161;
+            transform: translateY(-2px);
+        }
+        
+        .category-sidebar {
+            background-color: white;
+            border-right: 1px solid #E5E7EB;
+        }
+        
+        .category-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .category-item:hover, .category-item.active {
+            background-color: var(--pale-green);
+            border-left: 3px solid var(--mint-green);
+        }
+        
+        .game-card {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-frame-container {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+	
+	.game-container {
+            height: 600px;
+            max-height: 80vh;
+        }
+        
+        .badge-category {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+        }
+        
+        .badge-feature {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+        }
+        
+        .recommendation-card {
+            background-color: white;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid var(--warm-yellow);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--mint-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            background-color: var(--pale-green);
+            transition: all 0.3s ease;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--pale-green);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--mint-green);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8BC9A7;
+        }
+        
+        .footer-link:hover {
+            color: var(--mint-green);
+        }
+        
+        @media (max-width: 768px) {
+            .game-sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <span class="text-xl font-bold text-green-600">N</span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold">Nestico</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="#" class="nav-link font-medium">Categories</a>
+                    <a href="#" class="nav-link font-medium">Games</a>
+                    <a href="#" class="nav-link font-medium">For You</a>
+                    <a href="#" class="nav-link font-medium">About</a>
+                </nav>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center">
+                    <div class="relative">
+                        <input type="text" placeholder="Search games..." class="pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="ml-4 btn-primary px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden hidden mt-4 py-4 px-2 rounded-lg shadow-lg">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Home</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Categories</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Games</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">For You</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">About</a>
+                    
+                    <!-- Mobile Categories Quick Nav -->
+                    <div class="pt-2 mt-2 border-t border-gray-200">
+                        <p class="px-3 text-sm font-semibold text-gray-500 mb-2">Game Categories</p>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
+                            Puzzle
+                        </a>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-yellow-400 mr-2"></span>
+                            Racing
+                        </a>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-blue-400 mr-2"></span>
+                            Simulation
+                        </a>
+                    </div>
+                    
+                    <div class="relative mt-2">
+                        <input type="text" placeholder="Search games..." class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="btn-primary w-full mt-2 px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="index.html" class="hover:text-green-600">Home</a>
+                <span class="mx-2">/</span>
+                <a href="#" class="hover:text-green-600">Simulation</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-800 font-medium">Basketball-frvr </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row">
+            <!-- Left Sidebar - Categories -->
+            <div class="game-sidebar w-64 flex-shrink-0 mr-8">
+                <div class="category-sidebar rounded-lg overflow-hidden shadow-sm sticky top-24">
+                    <div class="bg-green-600 text-white p-4">
+                        <h3 class="font-bold text-lg">Game Categories</h3>
+                    </div>
+                    <div class="p-2">
+                        <a href="#" class="category-item active block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
+                            <span>Puzzle Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">42</span>
+                        </a>
+                        <a href="#" class="category-item block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-yellow-400 mr-2"></span>
+                            <span>Racing Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">28</span>
+                        </a>
+                        <a href="#" class="category-item block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-blue-400 mr-2"></span>
+                            <span>Simulation Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">35</span>
+                        </a>
+                        <a href="#" class="category-item block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-purple-400 mr-2"></span>
+                            <span>Strategy Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">19</span>
+                        </a>
+                        <a href="#" class="category-item block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-red-400 mr-2"></span>
+                            <span>Adventure Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">23</span>
+                        </a>
+                        <a href="#" class="category-item block p-3 rounded-md flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-indigo-400 mr-2"></span>
+                            <span>Word Games</span>
+                            <span class="ml-auto text-gray-500 text-sm">31</span>
+                        </a>
+                    </div>
+                    
+                    <div class="p-4 bg-green-50 border-t border-green-100">
+                        <h4 class="font-medium text-gray-700 mb-2">Top Picks For You</h4>
+                        <div class="space-y-3">
+                            <a href="#" class="flex items-center group">
+                                <div class="h-10 w-10 rounded bg-gray-200 mr-3 overflow-hidden">
+                                    <img src="/api/placeholder/40/40" alt="Game thumbnail" class="h-full w-full object-cover">
+                                </div>
+                                <span class="text-gray-700 group-hover:text-green-600 transition">Cozy Farm Life</span>
+                            </a>
+                            <a href="#" class="flex items-center group">
+                                <div class="h-10 w-10 rounded bg-gray-200 mr-3 overflow-hidden">
+                                    <img src="/api/placeholder/40/40" alt="Game thumbnail" class="h-full w-full object-cover">
+                                </div>
+                                <span class="text-gray-700 group-hover:text-green-600 transition">Word Wonders</span>
+                            </a>
+                            <a href="#" class="flex items-center group">
+                                <div class="h-10 w-10 rounded bg-gray-200 mr-3 overflow-hidden">
+                                    <img src="/api/placeholder/40/40" alt="Game thumbnail" class="h-full w-full object-cover">
+                                </div>
+                                <span class="text-gray-700 group-hover:text-green-600 transition">Tiny Racers</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content flex-grow">
+                <!-- Game Title and Info -->
+                <div class="flex flex-col md:flex-row mb-6 items-start">
+                    <div>
+                        <div class="flex items-center mb-2">
+                            <span class="badge-category text-xs px-3 py-1 rounded-full font-medium mr-2">Simulation</span>
+                            <span class="badge-feature text-xs px-3 py-1 rounded-full font-medium">Featured</span>
+                        </div>
+                        <h1 class="text-3xl md:text-4xl font-bold mb-2">Basketball-frvr</h1>
+                        <p class="text-gray-600 text-lg mb-4">Shoot, score, and soar to new heights in the ultimate basketball experience</p>
+                        
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.5 (2,345 ratings)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mt-4 md:mt-0 md:ml-auto space-x-3">
+                        <button class="btn-primary px-5 py-2 rounded-full font-medium flex items-center">
+                            <i class="fas fa-heart mr-2"></i> Favorite
+                        </button>
+                        <button class="btn-secondary px-5 py-2 rounded-full font-medium flex items-center">
+                            <i class="fas fa-share-alt mr-2"></i> Share
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Game Frame and Info Tabs -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md mb-8">
+                    <!-- Game Frame -->
+                    <div class="game-container w-full aspect-w-16 aspect-h-9 relative bg-black">
+                        <iframe src="https://basketball-frvr.pages.dev/" class="w-full h-full border-0" frameborder="0" allowfullscreen></iframe>
+                        
+                        <!-- Game Controls Overlay -->
+                        
+                    </div>
+                    
+                    <!-- Game Info Tabs -->
+                </div>    
+                
+                <!-- Personalized Recommendations -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">Similar Games You'll Love</h2>
+                        <a href="#" class="text-green-600 font-medium flex items-center hover:underline">
+                            View All <i class="fas fa-angle-right ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Game Recommendation 1 -->
+                        <div class="recommendation-card rounded-lg shadow-sm overflow-hidden">
+                            <div class="relative">
+                                <img src="/api/placeholder/400/200" alt="Puzzle adventure" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                    Puzzle
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-1">Jewel Quest</h3>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-2">4.0 (1.8k)</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Match sparkling jewels and solve ancient puzzles in this captivating adventure.</p>
+                                <a href="#" class="block w-full btn-primary py-2 rounded-lg font-medium text-center">Play Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Game Recommendation 2 -->
+                        <div class="recommendation-card rounded-lg shadow-sm overflow-hidden">
+                            <div class="relative">
+                                <img src="/api/placeholder/400/200" alt="Farm puzzle game" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                    Puzzle
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-1">Farm Heroes</h3>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-2">4.5 (2.1k)</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Match farm crops and help adorable animals in this charming countryside puzzle.</p>
+                                <a href="#" class="block w-full btn-primary py-2 rounded-lg font-medium text-center">Play Now</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Game Recommendation 3 -->
+                        <div class="recommendation-card rounded-lg shadow-sm overflow-hidden">
+                            <div class="relative">
+                                <img src="/api/placeholder/400/200" alt="Bubble shooter game" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                    Puzzle
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-1">Bubble Pop</h3>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-2">4.8 (1.5k)</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Shoot and match colorful bubbles in this relaxing and addictive puzzle game.</p>
+                                <a href="#" class="block w-full btn-primary py-2 rounded-lg font-medium text-center">Play Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               <!-- Player Comments Section -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+  <h2 class="text-2xl font-bold mb-6 font-sans">Player Comments</h2>
+
+  <div class="space-y-6 font-sans text-base text-gray-700">
+    <!-- Comment 1 -->
+    <div class="border-b border-gray-100 pb-6">
+      <div class="flex items-center mb-3">
+        <img src="/api/placeholder/40/40/useravatar.png" alt="User avatar" class="h-10 w-10 rounded-full mr-3">
+        <div>
+          <h4 class="font-bold text-gray-900 text-base">Emma Johnson</h4>
+          <div class="flex items-center">
+            <div class="flex text-yellow-400 space-x-0.5 text-sm">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+            <span class="text-xs text-gray-500 ml-2">4.5</span>
+          </div>
+        </div>
+      </div>
+      <p class="leading-relaxed">Such a fun and relaxing game! I love the colors and the puzzles are just challenging enough.</p>
+    </div>
+
+    <!-- Comment 2 -->
+    <div class="border-b border-gray-100 pb-6">
+      <div class="flex items-center mb-3">
+        <img src="/api/placeholder/40/40/useravatar2.png" alt="User avatar" class="h-10 w-10 rounded-full mr-3">
+        <div>
+          <h4 class="font-bold text-gray-900 text-base">Lucas Smith</h4>
+          <div class="flex items-center">
+            <div class="flex text-yellow-400 space-x-0.5 text-sm">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+            <span class="text-xs text-gray-500 ml-2">4.0</span>
+          </div>
+        </div>
+      </div>
+      <p class="leading-relaxed">Great game to pass time. The candy designs are adorable and the sound effects are satisfying.</p>
+    </div>
+  </div>
+
+  <!-- Add Comment Form -->
+  <div class="mt-8">
+    <h3 class="text-xl font-bold mb-4 font-sans">Leave a Comment</h3>
+    <form class="space-y-4 font-sans text-base">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Your Name"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-300 focus:outline-none font-sans text-sm">
+        <input type="email" placeholder="Your Email"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-300 focus:outline-none font-sans text-sm">
+      </div>
+      <textarea rows="4" placeholder="Your Comment"
+        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-300 focus:outline-none font-sans text-sm"></textarea>
+      <button type="submit" class="btn-primary px-6 py-2 rounded-full font-medium font-sans text-base">Submit Comment</button>
+    </form>
+  </div>
+</div>
+
+    </div>
+     
+</div>
+</div>
+<!-- Footer -->
+                <footer class="bg-gray-900 text-white pt-16 pb-8">
+                            <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Logo and About -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
+                            <span class="text-xl font-bold text-gray-900">N</span>
+                        </div>
+                        <span class="text-xl font-bold">Nestico</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your Cozy Game Corner - a relaxing retreat for casual gaming enthusiasts.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition footer-link">Home</a></li>
+                        <li><a href="#games" class="text-gray-400 hover:text-white transition footer-link">Games</a></li>
+                        <li><a href="#categories" class="text-gray-400 hover:text-white transition footer-link">Categories</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition footer-link">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">support@nestico.fun</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+1 (123) 456-7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">123 Game Street, Digital City</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 Nestico.fun. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </footer>
+    
+    
+    <!-- Scripts -->
+    <script>
+        document.getElementById('start-game-btn').addEventListener('click', function() {
+            document.getElementById('game-start-overlay').style.display = 'none';
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
