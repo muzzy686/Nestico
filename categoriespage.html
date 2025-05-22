@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Categories - Nestico | Your Cozy Game Corner</title>
+    <meta name="description" content="Discover all game categories at Nestico.fun - from relaxing puzzle games to exciting racing adventures and cozy simulation experiences. Find your perfect casual game today!">
+    <meta name="keywords" content="casual games, puzzle games, racing games, simulation games, family-friendly games, mobile games, browser games">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --mint-green: #A4D4AE;
+            --warm-yellow: #FDE68A;
+            --soft-brown: #A58B6F;
+            --pale-green: #F0F9F4;
+            --dark-brown-gray: #3B3A30;
+        }
+        
+        body {
+            background-color: var(--pale-green);
+            color: var(--dark-brown-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8BC9A7;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9D161;
+            transform: translateY(-2px);
+        }
+        
+        .category-card {
+            background-color: white;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--mint-green);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--warm-yellow);
+        }
+        
+        .game-card {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-nav {
+            background-color: white;
+            border-right: 1px solid #e5e7eb;
+        }
+        
+        .nav-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background-color: var(--pale-green);
+            border-left-color: var(--mint-green);
+        }
+        
+        .nav-item.active {
+            background-color: var(--pale-green);
+            border-left-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+            font-weight: 600;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--mint-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            background-color: var(--pale-green);
+            transition: all 0.3s ease;
+        }
+        
+        .featured-badge {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+        }
+        
+        .new-badge {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+        }
+        
+        .popular-badge {
+            background-color: var(--soft-brown);
+            color: white;
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+            border-color: var(--mint-green);
+        }
+        
+        .filter-btn:hover {
+            background-color: var(--pale-green);
+            border-color: var(--mint-green);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--pale-green);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--mint-green);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8BC9A7;
+        }
+        
+        /* Responsive sidebar */
+        @media (max-width: 768px) {
+            .sidebar-nav {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar-nav.open {
+                transform: translateX(0);
+            }
+        }
+        
+        /* Loading animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <span class="text-xl font-bold text-green-600">N</span>
+                    </div>
+                    <span class="text-xl font-bold">Nestico</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="/" class="nav-link font-medium">Home</a>
+                    <a href="/categories" class="nav-link font-medium text-green-600">Categories</a>
+                    <a href="/games" class="nav-link font-medium">Games</a>
+                    <a href="/recommendations" class="nav-link font-medium">For You</a>
+                    <a href="/about" class="nav-link font-medium">About</a>
+                </nav>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search games..." class="pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition w-64">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="ml-4 btn-primary px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden hidden mt-4 py-4 px-2 rounded-lg shadow-lg">
+                <div class="flex flex-col space-y-3">
+                    <a href="/" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Home</a>
+                    <a href="/categories" class="px-3 py-2 rounded-md bg-green-100 text-green-600 font-medium">Categories</a>
+                    <a href="/games" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Games</a>
+                    <a href="/recommendations" class="px-3 py-2 rounded-md hover:bg-green-100 transition">For You</a>
+                    <a href="/about" class="px-3 py-2 rounded-md hover:bg-green-100 transition">About</a>
+                    <div class="relative mt-2">
+                        <input type="text" placeholder="Search games..." class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="btn-primary w-full mt-2 px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center text-sm">
+                <a href="/" class="text-gray-500 hover:text-green-600 transition">Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400 text-xs"></i>
+                <span class="text-green-600 font-medium">Categories</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="sidebar-nav fixed md:relative z-40 w-64 h-full md:h-auto overflow-y-auto">
+            <!-- Mobile Close Button -->
+            <div class="md:hidden flex justify-between items-center p-4 border-b">
+                <h3 class="font-bold text-lg">Categories</h3>
+                <button id="sidebar-close" class="text-gray-500">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <h3 class="hidden md:block font-bold text-lg mb-6">Game Categories</h3>
+                
+                <!-- Category Navigation -->
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#all" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg active" data-category="all">
+                            <i class="fas fa-th-large mr-3 text-green-600"></i>
+                            All Games
+                            <span class="ml-auto bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">240+</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#puzzle" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="puzzle">
+                            <i class="fas fa-puzzle-piece mr-3 text-purple-500"></i>
+                            Puzzle Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">85</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#racing" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="racing">
+                            <i class="fas fa-car mr-3 text-red-500"></i>
+                            Racing Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">42</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#simulation" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="simulation">
+                            <i class="fas fa-building mr-3 text-blue-500"></i>
+                            Simulation Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">58</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#arcade" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="arcade">
+                            <i class="fas fa-gamepad mr-3 text-orange-500"></i>
+                            Arcade Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">35</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#adventure" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="adventure">
+                            <i class="fas fa-compass mr-3 text-green-500"></i>
+                            Adventure Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">28</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#strategy" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="strategy">
+                            <i class="fas fa-chess mr-3 text-indigo-500"></i>
+                            Strategy Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">22</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#casual" class="nav-item flex items-center px-4 py-3 text-sm rounded-lg" data-category="casual">
+                            <i class="fas fa-heart mr-3 text-pink-500"></i>
+                            Casual Games
+                            <span class="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">67</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Popular Tags -->
+                <div class="mt-8">
+                    <h4 class="font-semibold text-sm mb-4 text-gray-700">Popular Tags</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-green-200 transition">Family</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-blue-200 transition">Relaxing</span>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-purple-200 transition">Brain</span>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-yellow-200 transition">Quick</span>
+                        <span class="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-pink-200 transition">Creative</span>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full cursor-pointer hover:bg-indigo-200 transition">Challenge</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Overlay for mobile sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden hidden"></div>
+        
+        <!-- Mobile Sidebar Toggle -->
+        <button id="sidebar-toggle" class="md:hidden fixed bottom-6 left-6 z-50 bg-green-600 text-white p-3 rounded-full shadow-lg">
+            <i class="fas fa-filter"></i>
+        </button>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 md:ml-0">
+            <!-- Page Header -->
+            <section class="bg-gradient-to-r from-green-100 to-blue-100 py-12">
+                <div class="container mx-auto px-4">
+                    <div class="text-center">
+                        <h1 class="text-4xl font-bold mb-4">Explore Game Categories</h1>
+                        <p class="text-lg text-gray-700 max-w-2xl mx-auto">Discover your perfect gaming experience from our carefully curated collection of casual, family-friendly games.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Filters and Sorting -->
+            <section class="bg-white border-b sticky top-16 z-20">
+                <div class="container mx-auto px-4 py-4">
+                    <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                        <!-- Filter Buttons -->
+                        <div class="flex flex-wrap gap-2">
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium active" data-filter="all">All Games</button>
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="new">New Releases</button>
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="popular">Most Popular</button>
+                            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-filter="featured">Featured</button>
+                        </div>
+                        
+                        <!-- Sort Options -->
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-600">Sort by:</span>
+                            <select id="sort-select" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300">
+                                <option value="name">Name</option>
+                                <option value="popularity">Popularity</option>
+                                <option value="rating">Rating</option>
+                                <option value="date">Date Added</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Games Grid -->
+            <section class="py-8">
+                <div class="container mx-auto px-4">
+                    <!-- Category Title -->
+                    <div class="mb-8">
+                        <h2 id="category-title" class="text-2xl font-bold mb-2">All Games</h2>
+                        <p id="category-description" class="text-gray-600">Browse through our complete collection of casual games perfect for relaxation and fun.</p>
+                    </div>
+                    
+                    <!-- Games Grid -->
+                    <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Game cards will be populated by JavaScript -->
+                    </div>
+                    
+                    <!-- Load More Button -->
+                    <div class="text-center mt-12">
+                        <button id="load-more" class="btn-secondary px-8 py-3 rounded-full font-medium shadow-md">
+                            Load More Games <i class="fas fa-angle-down ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Logo and About -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
+                            <span class="text-xl font-bold text-gray-900">N</span>
+                        </div>
+                        <span class="text-xl font-bold">Nestico</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your Cozy Game Corner - a relaxing retreat for casual gaming enthusiasts.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="/games" class="text-gray-400 hover:text-white transition">Games</a></li>
+                        <li><a href="/categories" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                        <li><a href="/about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="/blog" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Game Categories -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#puzzle" class="text-gray-400 hover:text-white transition">Puzzle Games</a></li>
+                        <li><a href="#racing" class="text-gray-400 hover:text-white transition">Racing Games</a></li>
+                        <li><a href="#simulation" class="text-gray-400 hover:text-white transition">Simulation Games</a></li>
+                        <li><a href="#arcade" class="text-gray-400 hover:text-white transition">Arcade Games</a></li>
+                        <li><a href="#casual" class="text-gray-400 hover:text-white transition">Casual Games</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">support@nestico.fun</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+1 (123) 456-7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">123 Game Street, Digital City</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 Nestico.fun. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Complete game data structure
+const gameData = {
+    puzzle: [
+        {
+            id: 1,
+            title: "Sweet Candy Match",
+            description: "Match colorful candies in this delightful puzzle adventure.",
+            rating: 4.5,
+            reviews: 2300,
+            image: "/api/placeholder/300/180",
+            category: "puzzle",
+            tags: ["new", "popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 2,
+            title: "Word Wonders",
+            description: "Challenge your vocabulary in this addictive word game.",
+            rating: 4.2,
+            reviews: 856,
+            image: "/api/placeholder/300/180",
+            category: "puzzle",
+            tags: ["featured"],
+            difficulty: "Medium"
+        },
+        {
+            id: 3,
+            title: "Block Blast",
+            description: "Clear blocks and create amazing combos in this satisfying puzzle.",
+            rating: 4.7,
+            reviews: 1200,
+            image: "/api/placeholder/300/180",
+            category: "puzzle",
+            tags: ["popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 4,
+            title: "Jigsaw Magic",
+            description: "Piece together beautiful landscapes in relaxing jigsaw puzzles.",
+            rating: 4.3,
+            reviews: 945,
+            image: "/api/placeholder/300/180",
+            category: "puzzle",
+            tags: [],
+            difficulty: "Easy"
+        }
+    ],
+    racing: [
+        {
+            id: 5,
+            title: "Tiny Racers",
+            description: "Race through colorful tracks in this fun arcade racer.",
+            rating: 4.0,
+            reviews: 1500,
+            image: "/api/placeholder/300/180",
+            category: "racing",
+            tags: ["popular"],
+            difficulty: "Medium"
+        },
+        {
+            id: 6,
+            title: "Fruit Kart",
+            description: "Race with cute fruit characters through exciting tracks.",
+            rating: 4.9,
+            reviews: 3200,
+            image: "/api/placeholder/300/180",
+            category: "racing",
+            tags: ["featured", "popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 7,
+            title: "Speed Rush",
+            description: "Feel the adrenaline in this fast-paced racing adventure.",
+            rating: 4.1,
+            reviews: 876,
+            image: "/api/placeholder/300/180",
+            category: "racing",
+            tags: ["new"],
+            difficulty: "Hard"
+        }
+    ],
+    simulation: [
+        {
+            id: 8,
+            title: "Cozy Farm Life",
+            description: "Build and manage your dream farm in this relaxing sim.",
+            rating: 4.9,
+            reviews: 3200,
+            image: "/api/placeholder/300/180",
+            category: "simulation",
+            tags: ["featured", "popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 9,
+            title: "Cozy Cafe",
+            description: "Manage your own cafe and make customers happy.",
+            rating: 4.4,
+            reviews: 1890,
+            image: "/api/placeholder/300/180",
+            category: "simulation",
+            tags: ["popular"],
+            difficulty: "Medium"
+        },
+        {
+            id: 10,
+            title: "Pet Paradise",
+            description: "Create the perfect home for adorable virtual pets.",
+            rating: 4.6,
+            reviews: 2100,
+            image: "/api/placeholder/300/180",
+            category: "simulation",
+            tags: ["new", "featured"],
+            difficulty: "Easy"
+        }
+    ],
+    arcade: [
+        {
+            id: 11,
+            title: "Bubble Pop",
+            description: "Pop colorful bubbles in this relaxing arcade game.",
+            rating: 4.2,
+            reviews: 1500,
+            image: "/api/placeholder/300/180",
+            category: "arcade",
+            tags: ["popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 12,
+            title: "Space Jumper",
+            description: "Jump through space platforms in this endless arcade adventure.",
+            rating: 4.0,
+            reviews: 890,
+            image: "/api/placeholder/300/180",
+            category: "arcade",
+            tags: ["new"],
+            difficulty: "Medium"
+        }
+    ],
+    adventure: [
+        {
+            id: 13,
+            title: "Treasure Hunt",
+            description: "Explore mysterious islands and find hidden treasures.",
+            rating: 4.3,
+            reviews: 1200,
+            image: "/api/placeholder/300/180",
+            category: "adventure",
+            tags: ["featured"],
+            difficulty: "Medium"
+        },
+        {
+            id: 14,
+            title: "Magic Quest",
+            description: "Embark on a magical journey through enchanted lands.",
+            rating: 4.5,
+            reviews: 1800,
+            image: "/api/placeholder/300/180",
+            category: "adventure",
+            tags: ["popular"],
+            difficulty: "Medium"
+        }
+    ],
+    strategy: [
+        {
+            id: 15,
+            title: "Chess Master",
+            description: "Challenge your mind with classic chess gameplay.",
+            rating: 4.1,
+            reviews: 650,
+            image: "/api/placeholder/300/180",
+            category: "strategy",
+            tags: [],
+            difficulty: "Hard"
+        },
+        {
+            id: 16,
+            title: "Tower Defense",
+            description: "Defend your base with strategic tower placement.",
+            rating: 4.4,
+            reviews: 2200,
+            image: "/api/placeholder/300/180",
+            category: "strategy",
+            tags: ["popular"],
+            difficulty: "Medium"
+        }
+    ],
+    casual: [
+        {
+            id: 17,
+            title: "Relaxing Garden",
+            description: "Create and tend to your peaceful zen garden.",
+            rating: 4.8,
+            reviews: 3500,
+            image: "/api/placeholder/300/180",
+            category: "casual",
+            tags: ["featured", "popular"],
+            difficulty: "Easy"
+        },
+        {
+            id: 18,
+            title: "Meditation Sounds",
+            description: "Relax with soothing sounds and calming visuals.",
+            rating: 4.6,
+            reviews: 2800,
+            image: "/api/placeholder/300/180",
+            category: "casual",
+            tags: ["new"],
+            difficulty: "Easy"
+        }
+    ]
+};
+
+// Category information configuration
+const categoryInfo = {
+    all: {
+        title: "All Games",
+        description: "Browse through our complete collection of casual games perfect for relaxation and fun."
+    },
+    puzzle: {
+        title: "Puzzle Games",
+        description: "Challenge your mind with engaging puzzle games that test your problem-solving skills."
+    },
+    racing: {
+        title: "Racing Games",
+        description: "Feel the thrill of speed in exciting racing adventures and competitions."
+    },
+    simulation: {
+        title: "Simulation Games",
+        description: "Experience realistic simulations and build your dream virtual worlds."
+    },
+    arcade: {
+        title: "Arcade Games",
+        description: "Enjoy classic arcade-style gaming with simple controls and endless fun."
+    },
+    adventure: {
+        title: "Adventure Games",
+        description: "Embark on thrilling adventures and explore mysterious worlds."
+    },
+    strategy: {
+        title: "Strategy Games",
+        description: "Use your tactical skills and strategic thinking to conquer challenges."
+    },
+    casual: {
+        title: "Casual Games",
+        description: "Relax and unwind with gentle, easy-to-play casual gaming experiences."
+    }
+};
+
+// Current display state
+let currentGames = [];
+let currentCategory = 'all';
+let currentFilter = 'all';
+let gamesPerPage = 8;
+let currentPage = 1;
+
+// Get all games from all categories
+function getAllGames() {
+    let allGames = [];
+    Object.keys(gameData).forEach(category => {
+        allGames = allGames.concat(gameData[category]);
+    });
+    return allGames;
+}
+
+// Get games by specific category
+function getGamesByCategory(category) {
+    if (category === 'all') {
+        return getAllGames();
+    }
+    return gameData[category] || [];
+}
+
+// Filter games based on filter criteria
+function filterGames(games, filter) {
+    if (filter === 'all') return games;
+    
+    return games.filter(game => {
+        switch (filter) {
+            case 'new':
+                return game.tags.includes('new');
+            case 'popular':
+                return game.tags.includes('popular');
+            case 'featured':
+                return game.tags.includes('featured');
+            default:
+                return true;
+        }
+    });
+}
+
+// Create game card HTML
+function createGameCard(game) {
+    const badges = game.tags.map(tag => {
+        let badgeClass = '';
+        let badgeText = '';
+        
+        switch (tag) {
+            case 'new':
+                badgeClass = 'new-badge';
+                badgeText = 'New';
+                break;
+            case 'popular':
+                badgeClass = 'popular-badge';
+                badgeText = 'Popular';
+                break;
+            case 'featured':
+                badgeClass = 'featured-badge';
+                badgeText = 'Featured';
+                break;
+        }
+        
+        return `<span class="${badgeClass} text-xs px-2 py-1 rounded-full font-medium">${badgeText}</span>`;
+    }).join('');
+
+    // Generate star rating
+    const stars = Array.from({length: 5}, (_, i) => {
+        const filled = i < Math.floor(game.rating);
+        const halfFilled = i === Math.floor(game.rating) && game.rating % 1 >= 0.5;
+        
+        if (filled) {
+            return '<i class="fas fa-star text-yellow-400"></i>';
+        } else if (halfFilled) {
+            return '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+        } else {
+            return '<i class="far fa-star text-gray-300"></i>';
+        }
+    }).join('');
+
+    return `
+        <div class="game-card p-6 rounded-xl shadow-md hover:shadow-lg fade-in-up">
+            <div class="relative mb-4">
+                <img src="${game.image}" alt="${game.title}" class="w-full h-40 object-cover rounded-lg">
+                <div class="absolute top-2 right-2 flex flex-col gap-1">
+                    ${badges}
+                </div>
+                <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    ${game.difficulty}
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <h3 class="font-bold text-lg mb-2 hover:text-green-600 transition cursor-pointer">${game.title}</h3>
+                <p class="text-gray-600 text-sm line-clamp-2">${game.description}</p>
+            </div>
+            
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-1">
+                    ${stars}
+                    <span class="text-sm text-gray-600 ml-2">${game.rating}</span>
+                </div>
+                <span class="text-xs text-gray-500">${game.reviews.toLocaleString()} reviews</span>
+            </div>
+            
+            <div class="flex space-x-2">
+                <button class="flex-1 btn-primary py-2 px-4 rounded-lg font-medium text-sm hover:shadow-md transition">
+                    <i class="fas fa-play mr-2"></i>Play Now
+                </button>
+                <button class="btn-secondary p-2 rounded-lg hover:shadow-md transition" title="Add to Favorites">
+                    <i class="far fa-heart"></i>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Render games grid
+function renderGamesGrid(games, reset = true) {
+    const gamesGrid = document.getElementById('games-grid');
+    
+    if (reset) {
+        gamesGrid.innerHTML = '';
+        currentPage = 1;
+    }
+    
+    const startIndex = (currentPage - 1) * gamesPerPage;
+    const endIndex = startIndex + gamesPerPage;
+    const gamesToShow = games.slice(startIndex, endIndex);
+    
+    if (gamesToShow.length === 0 && reset) {
+        gamesGrid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <i class="fas fa-gamepad text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">No Games Found</h3>
+                <p class="text-gray-500">Try selecting a different category or filter.</p>
+            </div>
+        `;
+        document.getElementById('load-more').style.display = 'none';
+        return;
+    }
+    
+    // Add game cards
+    gamesToShow.forEach((game, index) => {
+        const gameCard = document.createElement('div');
+        gameCard.innerHTML = createGameCard(game);
+        gameCard.firstElementChild.style.animationDelay = `${index * 0.1}s`;
+        gamesGrid.appendChild(gameCard.firstElementChild);
+    });
+    
+    // Control load more button visibility
+    const loadMoreBtn = document.getElementById('load-more');
+    if (endIndex >= games.length) {
+        loadMoreBtn.style.display = 'none';
+    } else {
+        loadMoreBtn.style.display = 'block';
+    }
+}
+
+// Update category title and description
+function updateCategoryInfo(category) {
+    const titleElement = document.getElementById('category-title');
+    const descriptionElement = document.getElementById('category-description');
+    
+    const info = categoryInfo[category];
+    if (info) {
+        titleElement.textContent = info.title;
+        descriptionElement.textContent = info.description;
+    }
+}
+
+// Update sidebar navigation state
+function updateNavigationState(category) {
+    // Remove all active states
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Add active state to current category
+    const activeItem = document.querySelector(`[data-category="${category}"]`);
+    if (activeItem) {
+        activeItem.classList.add('active');
+    }
+}
+
+// Update filter button state
+function updateFilterState(filter) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const activeFilter = document.querySelector(`[data-filter="${filter}"]`);
+    if (activeFilter) {
+        activeFilter.classList.add('active');
+    }
+}
+
+// Switch category
+function switchCategory(category) {
+    currentCategory = category;
+    currentFilter = 'all'; // Reset filter
+    
+    // Update UI state
+    updateNavigationState(category);
+    updateFilterState('all');
+    updateCategoryInfo(category);
+    
+    // Get and display games
+    const games = getGamesByCategory(category);
+    currentGames = filterGames(games, currentFilter);
+    renderGamesGrid(currentGames, true);
+    
+    // Scroll to games section
+    /*document.getElementById('games-grid').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+    });
+    */
+}
+
+// Apply filter
+function applyFilter(filter) {
+    currentFilter = filter;
+    updateFilterState(filter);
+    
+    const games = getGamesByCategory(currentCategory);
+    currentGames = filterGames(games, filter);
+    renderGamesGrid(currentGames, true);
+}
+
+// Sort games
+function sortGames(games, sortBy) {
+    const sortedGames = [...games];
+    
+    switch (sortBy) {
+        case 'name':
+            return sortedGames.sort((a, b) => a.title.localeCompare(b.title));
+        case 'popularity':
+            return sortedGames.sort((a, b) => b.reviews - a.reviews);
+        case 'rating':
+            return sortedGames.sort((a, b) => b.rating - a.rating);
+        case 'date':
+            // Assume new games come first
+            return sortedGames.sort((a, b) => {
+                const aIsNew = a.tags.includes('new');
+                const bIsNew = b.tags.includes('new');
+                if (aIsNew && !bIsNew) return -1;
+                if (!aIsNew && bIsNew) return 1;
+                return 0;
+            });
+        default:
+            return sortedGames;
+    }
+}
+
+// Initialize event listeners
+function initializeEventListeners() {
+    // Sidebar category navigation click events
+    document.querySelectorAll('[data-category]').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = item.getAttribute('data-category');
+            switchCategory(category);
+            
+            // Close sidebar on mobile
+            if (window.innerWidth < 768) {
+                toggleSidebar(false);
+            }
+        });
+    });
+    
+    // Filter button click events
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+            applyFilter(filter);
+        });
+    });
+    
+    // Sort selector change event
+    document.getElementById('sort-select').addEventListener('change', (e) => {
+        const sortBy = e.target.value;
+        currentGames = sortGames(currentGames, sortBy);
+        renderGamesGrid(currentGames, true);
+    });
+    
+    // Load more button click event
+    document.getElementById('load-more').addEventListener('click', () => {
+        currentPage++;
+        renderGamesGrid(currentGames, false);
+    });
+    
+    // Mobile sidebar controls
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarClose = document.getElementById('sidebar-close');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => toggleSidebar(true));
+    }
+    
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', () => toggleSidebar(false));
+    }
+    
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+    }
+    
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', handleSearch);
+    }
+}
+
+// Mobile sidebar control
+function toggleSidebar(show) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (show) {
+        sidebar.classList.add('open');
+        overlay.classList.remove('hidden');
+    } else {
+        sidebar.classList.remove('open');
+        overlay.classList.add('hidden');
+    }
+}
+
+// Search functionality
+function handleSearch(e) {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    
+    if (searchTerm === '') {
+        // If search is empty, show current category games
+        const games = getGamesByCategory(currentCategory);
+        currentGames = filterGames(games, currentFilter);
+    } else {
+        // Search in all games
+        const allGames = getAllGames();
+        currentGames = allGames.filter(game => 
+            game.title.toLowerCase().includes(searchTerm) ||
+            game.description.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    renderGamesGrid(currentGames, true);
+}
+
+// Initialize after page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize event listeners
+    initializeEventListeners();
+    
+    // Initial load of all games
+    switchCategory('all');
+    
+    // Add scroll effects
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 100) {
+            header.classList.add('shadow-lg');
+        } else {
+            header.classList.remove('shadow-lg');
+        }
+    });
+});
+
+// Handle responsive behavior
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        // Auto-close mobile sidebar on desktop
+        toggleSidebar(false);
+    }
+});
+    
+    
+    </script>
