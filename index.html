@@ -333,7 +333,7 @@
             </div>
             
             <div class="mt-12 text-center">
-                <button class="btn-secondary px-6 py-3 rounded-full font-medium shadow-md">
+                <button id="view-all-categories-btn" class="btn-secondary px-6 py-3 rounded-full font-medium shadow-md">
                     View All Categories <i class="fas fa-angle-right ml-2"></i>
                 </button>
             </div>
@@ -837,6 +837,10 @@
                 header.classList.remove('shadow-md');
             }
         });
+    //Add listener on View All Categories
+    document.getElementById('view-all-categories-btn').addEventListener('click', function() {
+    window.location.href = 'categoriespage.html';
+});
     </script>
 </body>
 </html>
