@@ -152,6 +152,69 @@
             }
         }
     </style>
+    <script>
+    // 获取 URL 参数
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // 所有游戏数据
+    const allGames = [
+      {
+        id: "2048",
+        title: "2048",
+        description: "Slide tiles to merge and reach 2048—strategic and addictive.",
+        rating: 4.5,
+        reviews: 2300,
+        image: "/api/placeholder/300/180/2048pic.jpg",
+        iframeSrc: "https://mateuszsokola.github.io/2048-in-react/"
+      },
+      {
+        id: "trafficescape",
+        title: "Traffic Escape",
+        description: "Unblock cars and escape traffic in this smart puzzle.",
+        rating: 4.2,
+        reviews: 856,
+        image: "/api/placeholder/300/180/trafficescapepic.jpg",
+        iframeSrc: "https://muzzy686.github.io/traffic-escape/package/game/"
+      },
+      {
+        id: "basketball",
+        title: "Basketball FRVR",
+        description: "Shoot hoops endlessly and beat your high score.",
+        rating: 4.7,
+        reviews: 1200,
+        image: "/api/placeholder/300/180/basketballfrvrpic.jpg",
+        iframeSrc: "https://basketball-frvr.pages.dev/"
+      },
+      {
+        id: "tetris",
+        title: "Tetris",
+        description: "Stack falling blocks to clear lines and score points.",
+        rating: 4.7,
+        reviews: 1200,
+        image: "/api/placeholder/300/180/tetrispic.jpg",
+        iframeSrc: "https://github.tanchangwen.com/react-tetris"
+      }
+    ];
+
+    // 页面加载后填充内容
+    window.addEventListener("DOMContentLoaded", () => {
+      const gameId = getQueryParam("id");
+      const game = allGames.find(g => g.id === gameId);
+
+      if (!game) {
+        document.getElementById("game-detail").innerHTML = `<p class='text-center text-red-600'>Game not found.</p>`;
+        return;
+      }
+
+      document.getElementById("game-title").textContent = game.title;
+      document.getElementById("game-description").textContent = game.description;
+      document.getElementById("game-rating").textContent = `${game.rating} (${game.reviews} reviews)`;
+      document.getElementById("game-iframe").src = game.iframeSrc;
+    });
+  </script>
 </head>
 <body>
     <!-- Header -->
@@ -319,8 +382,8 @@
                             <span class="badge-category text-xs px-3 py-1 rounded-full font-medium mr-2">Puzzle</span>
                             <span class="badge-feature text-xs px-3 py-1 rounded-full font-medium">Featured</span>
                         </div>
-                        <h1 class="text-3xl md:text-4xl font-bold mb-2">Sweet Candy Match</h1>
-                        <p class="text-gray-600 text-lg mb-4">Match colorful candies in this delightful puzzle adventure</p>
+                        <h1 id="game-title" class="text-3xl md:text-4xl font-bold mb-2">Sweet Candy Match</h1>
+                        <p  id="game-description" class="text-gray-600 text-lg mb-4">Match colorful candies in this delightful puzzle adventure</p>
                         
                         <div class="flex items-center mb-4">
                             <div class="flex text-yellow-400 mr-2">
@@ -330,7 +393,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i>
                             </div>
-                            <span class="text-sm text-gray-600">4.5 (2,345 ratings)</span>
+                            <span id="game-rating" class="text-sm text-gray-600">4.5 (2,345 ratings)</span>
                         </div>
                     </div>
                     
@@ -347,18 +410,8 @@
                 <!-- Game Frame and Info Tabs -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-md mb-8">
                     <!-- Game Frame -->
-                    <div class="game-frame-container w-full aspect-w-16 aspect-h-9 relative bg-black">
-                        <iframe src="about:blank" class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen></iframe>
-                        
-                        <!-- Game Controls Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70" id="game-start-overlay">
-                            <div class="text-center">
-                                <p class="text-white text-lg mb-4">Click to start playing Sweet Candy Match</p>
-                                <button id="start-game-btn" class="btn-primary px-8 py-3 rounded-full font-bold text-lg">
-                                    <i class="fas fa-play mr-2"></i> Play Now
-                                </button>
-                            </div>
-                        </div>
+                    <div class="aspect-w-16 aspect-h-9">
+                      <iframe id="game-iframe" src="" class="w-full h-full border" allowfullscreen></iframe>
                     </div>
                     
                     <!-- Game Info Tabs -->
