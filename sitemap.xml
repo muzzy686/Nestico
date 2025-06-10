@@ -1,49 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-    <loc>https://nestico.fun/</loc>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://nestico.fun/</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>1.0000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/2048.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/airportscecurity.html</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/basketball-frvr.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/treasure-hunt.html</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/mahjonggsolitaire.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/space-jumper.html</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/pieceofcakemergeandbake.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/pet-paradise.html</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/sudoku.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/categoriespage</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/tetris.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/2048</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
   </url>
   <url>
-    <loc>https://nestico.fun/games/traffic-escape.html</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+       <loc>https://nestico.fun/games/traffic-escape</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/sudoku</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/tetris</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/basketball-frvr</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/mahjonggsolitaire</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/categoriespage</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/pieceofcakemergeandbake</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/categories</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/recommendations</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/about</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/blog</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://nestico.fun/games/index.html</loc>
+       <lastmod>2025-06-10T14:05:28+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.5120</priority>
   </url>
 </urlset>
