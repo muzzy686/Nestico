@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Security - Nothing but Fun | Enjoy puzzle games online!</title>
+    <meta name="description" content="Play Airport Security - Screen passengers, find suspicious items, and maintain airport safety. Enjoy this puzzle game at Nestico.fun!">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+     <style>
+    .game-frame-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+    .game-frame-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+    <style>
+        :root {
+            --mint-green: #A4D4AE;
+            --warm-yellow: #FDE68A;
+            --soft-brown: #A58B6F;
+            --pale-green: #F0F9F4;
+            --dark-brown-gray: #3B3A30;
+        }
+        
+        body {
+            background-color: var(--pale-green);
+            color: var(--dark-brown-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8BC9A7;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #F9D161;
+            transform: translateY(-2px);
+        }
+        
+        .category-sidebar {
+            background-color: white;
+            border-right: 1px solid #E5E7EB;
+        }
+        
+        .category-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .category-item:hover, .category-item.active {
+            background-color: var(--pale-green);
+            border-left: 3px solid var(--mint-green);
+        }
+        
+        .game-card {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-frame-container {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge-category {
+            background-color: var(--mint-green);
+            color: var(--dark-brown-gray);
+        }
+        
+        .badge-feature {
+            background-color: var(--warm-yellow);
+            color: var(--dark-brown-gray);
+        }
+        
+        .recommendation-card {
+            background-color: white;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid var(--warm-yellow);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--mint-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            background-color: var(--pale-green);
+            transition: all 0.3s ease;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--pale-green);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--mint-green);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8BC9A7;
+        }
+        
+        .footer-link:hover {
+            color: var(--mint-green);
+        }
+        
+        @media (max-width: 768px) {
+            .game-sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+  
+  <body>
+  <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <span class="text-xl font-bold text-green-600">N</span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold">Nothing but Fun</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="#" class="nav-link font-medium">Categories</a>
+                    <a href="#" class="nav-link font-medium">Games</a>
+                    <a href="#" class="nav-link font-medium">For You</a>
+                    <a href="#" class="nav-link font-medium">About</a>
+                </nav>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center">
+                    <div class="relative">
+                        <input type="text" placeholder="Search games..." class="pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="ml-4 btn-primary px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden hidden mt-4 py-4 px-2 rounded-lg shadow-lg">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Home</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Categories</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">Games</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">For You</a>
+                    <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition">About</a>
+                    
+                    <!-- Mobile Categories Quick Nav -->
+                    <div class="pt-2 mt-2 border-t border-gray-200">
+                        <p class="px-3 text-sm font-semibold text-gray-500 mb-2">Game Categories</p>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-green-400 mr-2"></span>
+                            Puzzle
+                        </a>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-yellow-400 mr-2"></span>
+                            Racing
+                        </a>
+                        <a href="#" class="px-3 py-2 rounded-md hover:bg-green-100 transition flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-blue-400 mr-2"></span>
+                            Simulation
+                        </a>
+                    </div>
+                    
+                    <div class="relative mt-2">
+                        <input type="text" placeholder="Search games..." class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-300 transition">
+                        <span class="absolute left-3 top-2.5 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                    <button class="btn-primary w-full mt-2 px-4 py-2 rounded-full font-medium">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+            <div class="container mx-auto px-4 py-8" style="width: 70%;">
+                <!-- Game Title and Info -->
+                <div class="flex flex-col md:flex-row mb-6 items-start">
+                    <div>
+                        
+                        <h1 id="game-title" class="text-3xl md:text-4xl font-bold mb-2">Airport Security</h1>
+                        <p  id="game-description" class="text-gray-600 text-lg mb-4">Screen passengers, find suspicious items, and maintain airport safety.</p>
+
+                        <!--
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span id="game-rating" class="text-sm text-gray-600">4.5 (2,345 ratings)</span>
+                        </div>
+                        -->
+                    </div>
+                    
+                    <div class="flex mt-4 md:mt-0 md:ml-auto space-x-3">
+                        <button class="btn-primary px-5 py-2 rounded-full font-medium flex items-center">
+                            <i class="fas fa-heart mr-2"></i> Favorite
+                        </button>
+                        <button class="btn-secondary px-5 py-2 rounded-full font-medium flex items-center">
+                            <i class="fas fa-share-alt mr-2"></i> Share
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Game Frame and Info Tabs -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md mb-8">
+                    <!-- Game Frame -->
+                    <div class="game-frame-wrapper rounded shadow-lg">
+                      <iframe id="game-iframe" tabindex="0"  width="80%" src="https://www.silvergames.com/en/airport-security/gameframe" allowfullscreen></iframe>
+                    </div>
+                </div>
+</div>
+   <!-- Footer -->
+   <footer class="bg-gray-900 text-white pt-16 pb-8">
+                            <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Logo and About -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="h-10 w-10 rounded-full bg-green-400 flex items-center justify-center">
+                            <span class="text-xl font-bold text-gray-900">N</span>
+                        </div>
+                        <span class="text-xl font-bold">Nothing but Fun</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Enjoy relaxing games online!</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition footer-link">Home</a></li>
+                        <li><a href="#games" class="text-gray-400 hover:text-white transition footer-link">Games</a></li>
+                        <li><a href="#categories" class="text-gray-400 hover:text-white transition footer-link">Categories</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition footer-link">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition footer-link">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">support@Nothing but Fun.fun</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+1 (123) 456-7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-green-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">123 Game Street, Digital City</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">&copy; 2025 Nothing but Fun.fun. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Terms of Service</a>
+                        <a href="#" class="text-gray-500 text-sm hover:text-white transition">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </footer>
+    
+    
+    <!-- Scripts -->
+    <script>
+       
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+	
+	<script>
+  window.onload = function () {
+    const iframe = document.getElementById('game-frame');
+    if (iframe) iframe.focus();
+  };
+</script>
+  </body>
+</html>
